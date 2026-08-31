@@ -145,8 +145,8 @@ int main() {
     string imposible(64, '0');
     struct Cfg { string nom; string alf; int n; };
     vector<Cfg> cfgs = {
-        {"A1", A1, 3}, {"A1", A1, 4}, {"A1", A1, 5},
-        {"A2", A2, 3}, {"A2", A2, 4}
+        {"A1", A1, 3}, {"A1", A1, 4}, {"A1", A1, 5}, {"A1", A1, 6},
+        {"A2", A2, 3}, {"A2", A2, 4}, {"A2", A2, 5}
     };
     ofstream csv("tiempos_fuerzabruta.csv");
     csv << "alfabeto,tam_alfabeto,longitud,espacio_teorico,tiempo_ms\n";
@@ -165,12 +165,22 @@ int main() {
 
     // Compara fuerza bruta pura contra ataque por diccionario
     cout << "4) FUERZA BRUTA vs. DICCIONARIO\n";
-    for (string clave : {string("hola"), string("zx7k")}) {
-        string h = sha256(clave);
+    struct CasoPrueba {
+        string clave;
+        string alfabeto;
+    };
+
+    vector<CasoPrueba> casos = {
+        {"admin", A1}, // "admin" existe en el diccionario y solo usa A1
+        {"zx7k", A2}   // "zx7k" no existe en el diccionario y requiere A2
+    };
+
+    for (const auto& c : casos) {
+        string h = sha256(c.clave);
         double ms_fb, ms_dic;
-        string rfb = fuerza_bruta(h, A2, 3, (int)clave.size(), cand, ms_fb);
+        string rfb = fuerza_bruta(h, c.alfabeto, 3, (int)c.clave.size(), cand, ms_fb);
         string rdc = ataque_diccionario(h, "diccionario.txt", ms_dic);
-        cout << "   \"" << clave << "\":  FB -> "
+        cout << "   \"" << c.clave << "\":  FB -> "
              << (rfb.empty() ? "no" : "ENCONTRADA") << " (" << ms_fb << " ms)"
              << "   |   Diccionario -> "
              << (rdc.empty() ? "NO encontrada" : "ENCONTRADA")
