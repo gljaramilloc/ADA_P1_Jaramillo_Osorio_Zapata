@@ -142,12 +142,21 @@ int main() {
     cout << "[-] Semilla generada del equipo: " << semilla << "\n";
     cout << "[-] Tamanho del alfabeto completo: " << ALFABETO_COMPLETO.length() 
          << " caracteres (" << ALFABETO_COMPLETO << ")\n\n";
+    
+    // Parametros de la politica del equipo, derivados de la semilla (Seccion 9.2)
+    int minLower = 2 + (semilla % 3);
+    int minUpper = 1 + (semilla % 2);
+    int minDigit = 1 + (semilla % 3);
+    int minSymbol = 1;
+    cout << "[-] Politica derivada de la semilla: minLower=" << minLower
+         << " minUpper=" << minUpper << " minDigit=" << minDigit
+         << " minSymbol=" << minSymbol << "\n\n";
 
     // 2. Definición de las 5 configuraciones requeridas por la sección 9.2
     vector<ConfiguracionBT> configs = {
-        {"1. Politica Completa (n=8)", 8, ALFABETO_COMPLETO, 2, 2, 2, 1},
-        {"2. Misma Politica (n=6)",    6, ALFABETO_COMPLETO, 2, 2, 2, 1},
-        {"3. Misma Politica (n=10)",  10, ALFABETO_COMPLETO, 2, 2, 2, 1},
+        {"1. Politica Completa (n=8)", 8, ALFABETO_COMPLETO, minLower, minUpper, minDigit, minSymbol},
+        {"2. Misma Politica (n=6)",    6, ALFABETO_COMPLETO, minLower, minUpper, minDigit, minSymbol},
+        {"3. Misma Politica (n=10)",  10, ALFABETO_COMPLETO, minLower, minUpper, minDigit, minSymbol},
         {"4. Politica Relajada (n=8)",  8, ALFABETO_COMPLETO, 1, 0, 0, 0},
         {"5. Sin Restricciones (n=6)",  6, ALFABETO_COMPLETO, 0, 0, 0, 0}
     };
