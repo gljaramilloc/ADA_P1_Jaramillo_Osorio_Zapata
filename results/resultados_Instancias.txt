@@ -1,0 +1,18 @@
+2) INSTANCIAS DEL EQUIPO
+   Semilla: 2263
+   Objetivo 1: "bgtq" (n=4)
+      hash: a00145511b737a049551233e7f0073be47b6881af149d23d7067720324d3022e
+      recuperada: "bgtq"  en 1482.2 ms (39719 candidatos)
+   Objetivo 2: "tevg" (n=4)
+      hash: e6b614ba0cfa1d7b3c66b13db416f6a9e8388cfd61a6ae8f5e7567fa62a9cf06
+      recuperada: "tevg"  en 34900.7 ms (939067 candidatos)
+   Objetivo 3: "ngher" (n=5)
+      hash: 77edcb10ffcc062c02640081d0da2f42ba72a8ac096cb906a45d75e17150b800
+      recuperada: "ngher"  en 251525 ms (6525550 candidatos)
+   Objetivo 4: "mfg1y" (n=5)
+      hash: 486ea63d55b5ab6979cca3197c80df313ff0dff39fcabb600153f98c20f888c6
+      recuperada: "mfg1y"  en 832432 ms (22123717 candidatos)
+   Objetivo 5: "lmbclc" (n=6)
+      hash: 5402bc4a95d911dc3166de089dc0ed1b5e24a0c4bd4d266464704db9732ad7df
+      (cuidado: longitud 6 puede tardar varios minutos)
+      //En este espacio se quedo mas de 30 minutos, se cancelo la ejecucion y se definio de manera teorica//

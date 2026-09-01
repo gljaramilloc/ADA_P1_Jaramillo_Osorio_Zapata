@@ -1,0 +1,4 @@
+FB:
+VALIDACION (instancia de referencia 'abc12', A2, n=5)
+   Recuperada: "abc12"  (CORRECTO)
+   Candidatos: 1776521   Tiempo: 73368.2 ms

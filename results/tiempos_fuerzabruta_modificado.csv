@@ -1,0 +1,8 @@
+alfabeto,tam_alfabeto,longitud,espacio_teorico,tiempo_ms,metodo
+A1,26,3,17576,709.476,medido
+A1,26,4,456976,18880.9,medido
+A1,26,5,11881376,496891,medido
+A1,26,6,308915776,12708600,estimado
+A2,36,3,46656,1899.43,medido
+A2,36,4,1679616,69715.1,medido
+A2,36,5,60466176,2487700,estimado

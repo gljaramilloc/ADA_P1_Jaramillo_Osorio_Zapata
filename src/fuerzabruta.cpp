@@ -131,6 +131,7 @@ int main() {
         string h = sha256(clave);
         cout << "   Objetivo " << (i+1) << ": \"" << clave << "\" (n="
              << longitudes[i] << ")\n";
+        cout << "      hash: " << h << "\n";
         if (longitudes[i] >= 6)
             cout << "      (cuidado: longitud 6 puede tardar varios minutos)\n";
         string rec = fuerza_bruta(h, *alf[i], 3, longitudes[i], cand, ms);
@@ -145,8 +146,8 @@ int main() {
     string imposible(64, '0');
     struct Cfg { string nom; string alf; int n; };
     vector<Cfg> cfgs = {
-        {"A1", A1, 3}, {"A1", A1, 4}, {"A1", A1, 5}, {"A1", A1, 6},
-        {"A2", A2, 3}, {"A2", A2, 4}, {"A2", A2, 5}
+        {"A1", A1, 3}, {"A1", A1, 4}, {"A1", A1, 5}, //{"A1", A1, 6} (Intratable),
+        {"A2", A2, 3}, {"A2", A2, 4}, // {"A2", A2, 5} (Intratable)
     };
     ofstream csv("tiempos_fuerzabruta.csv");
     csv << "alfabeto,tam_alfabeto,longitud,espacio_teorico,tiempo_ms\n";
@@ -179,7 +180,7 @@ int main() {
         string h = sha256(c.clave);
         double ms_fb, ms_dic;
         string rfb = fuerza_bruta(h, c.alfabeto, 3, (int)c.clave.size(), cand, ms_fb);
-        string rdc = ataque_diccionario(h, "diccionario.txt", ms_dic);
+        string rdc = ataque_diccionario(h, "../resources/diccionario.txt", ms_dic);
         cout << "   \"" << c.clave << "\":  FB -> "
              << (rfb.empty() ? "no" : "ENCONTRADA") << " (" << ms_fb << " ms)"
              << "   |   Diccionario -> "

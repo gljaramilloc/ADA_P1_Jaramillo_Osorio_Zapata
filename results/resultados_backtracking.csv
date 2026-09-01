@@ -1,0 +1,6 @@
+Configuracion,n,Tam_Alfabeto,minLower,minUpper,minDigit,minSymbol,Nodos_Generados_Sin_Poda,Nodos_Visitados_Con_Poda,Estados_Podados,Soluciones_Sin_Poda,Soluciones_Con_Poda,Porcentaje_Reduccion_Pct,Tiempo_Sin_Poda_ms,Tiempo_Con_Poda_ms
+"1. Politica Completa (n=6)",6,67,3,2,2,1,91828963717,1,1,0,0,100.0000,-1.00,0.00
+"2. Misma Politica (n=8)",8,67,3,2,2,1,412220218125681,0,0,0,0,100.0000,-1.00,-1.00
+"3. Misma Politica (n=10)",10,67,3,2,2,1,1850456559166182144,0,0,0,0,100.0000,-1.00,-1.00
+"4. Politica Relajada (n=8)",8,67,1,0,0,0,412220218125681,0,0,0,0,100.0000,-1.00,-1.00
+"5. Sin Restricciones (n=4)",4,67,0,0,0,0,20456441,19558574,296341,20151121,19262232,4.3892,900.66,1010.74

@@ -152,13 +152,13 @@ int main() {
          << " minUpper=" << minUpper << " minDigit=" << minDigit
          << " minSymbol=" << minSymbol << "\n\n";
 
-    // 2. Definición de las 5 configuraciones requeridas por la sección 9.2
+    // 2. Definición de las 5 configuraciones requeridas por la sección 9.2 (Con alteraciones en algunas)
     vector<ConfiguracionBT> configs = {
-        {"1. Politica Completa (n=8)", 8, ALFABETO_COMPLETO, minLower, minUpper, minDigit, minSymbol},
-        {"2. Misma Politica (n=6)",    6, ALFABETO_COMPLETO, minLower, minUpper, minDigit, minSymbol},
+        {"1. Politica Completa (n=6)", 6, ALFABETO_COMPLETO, minLower, minUpper, minDigit, minSymbol},
+        {"2. Misma Politica (n=8)",    8, ALFABETO_COMPLETO, minLower, minUpper, minDigit, minSymbol},
         {"3. Misma Politica (n=10)",  10, ALFABETO_COMPLETO, minLower, minUpper, minDigit, minSymbol},
         {"4. Politica Relajada (n=8)",  8, ALFABETO_COMPLETO, 1, 0, 0, 0},
-        {"5. Sin Restricciones (n=6)",  6, ALFABETO_COMPLETO, 0, 0, 0, 0}
+        {"5. Sin Restricciones (n=4)",  4, ALFABETO_COMPLETO, 0, 0, 0, 0}
     };
 
     vector<ResultadoExperimento> resultados;
@@ -177,17 +177,21 @@ int main() {
 
         string cadena_base = "";
 
-        // --- EJECUCIÓN CON PODA ---
-        res.nodosVisitadosConPoda = 0;
-        res.estadosPodados = 0;
-        res.solucionesConPoda = 0;
+    // --- EJECUCIÓN CON PODA ---
+    res.nodosVisitadosConPoda = 0;
+    res.estadosPodados = 0;
+    res.solucionesConPoda = 0;
 
+    if (cfg.n <= 6) {
         auto t1_poda = chrono::high_resolution_clock::now();
         bt_con_poda_rec(cadena_base, cfg.n, cfg.alfabeto,
                         cfg.minLower, cfg.minUpper, cfg.minDigit, cfg.minSymbol,
                         res.nodosVisitadosConPoda, res.estadosPodados, res.solucionesConPoda);
         auto t2_poda = chrono::high_resolution_clock::now();
         res.tiempoConPodaMs = chrono::duration<double, milli>(t2_poda - t1_poda).count();
+    } else {
+        res.tiempoConPodaMs = -1.0; // costo computacional omitido (n>=8, espacio de soluciones intratable)
+    }
 
         // --- EJECUCIÓN SIN PODA ---
         double nodos_totales_teoricos = 0;
@@ -199,8 +203,8 @@ int main() {
         res.nodosGeneradosSinPoda = 0;
         res.tiempoSinPodaMs = 0.0;
 
-        // Si n <= 6 se realiza la búsqueda real sin poda; para n >= 8 se calcula la referencia teórica
-        if (cfg.n <= 6) {
+        // Si n <= 4 se realiza la búsqueda real sin poda; para n >= 5 se calcula la referencia teórica
+        if (cfg.n <= 4) {
             auto t1_sin = chrono::high_resolution_clock::now();
             bt_sin_poda_rec(cadena_base, cfg.n, cfg.alfabeto,
                             cfg.minLower, cfg.minUpper, cfg.minDigit, cfg.minSymbol,
@@ -221,7 +225,7 @@ int main() {
         cout << "    [CON PODA] Nodos Visitados: " << res.nodosVisitadosConPoda 
              << " | Soluciones: " << res.solucionesConPoda 
              << " | Tiempo: " << res.tiempoConPodaMs << " ms\n";
-        if (cfg.n <= 6) {
+        if (cfg.n <= 4) {
             cout << "    [SIN PODA] Nodos Generados: " << res.nodosGeneradosSinPoda 
                  << " | Soluciones: " << res.solucionesSinPoda 
                  << " | Tiempo: " << res.tiempoSinPodaMs << " ms\n";
